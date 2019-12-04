@@ -92,13 +92,13 @@ const data = [
 const qs = cls => document.querySelector(cls)
 
 // create element also gets its own func
-const ce = (type, num) => {
+const ce = (typ, num) => {
   if (!num) {
-    return document.createElement(type)
+    return document.createElement(typ)
   }
   const elArr = []
   for (let i = 1; i <= num; i++) {
-    elArr.push(document.createElement(type))
+    elArr.push(document.createElement(typ))
   }
 
   return elArr
@@ -118,26 +118,32 @@ const createArticle = data => {
   const article = ce('div')
   const h2 = ce('h2')
   const date = ce('p')
-  const p = cd('p', 3)
+  const p = ce('p', 3)
   const expBtn = ce('span')
 
   article.classList.add('article')
   date.classList.add('date')
-  expBtn.cassList.add('expandButton')
+  expBtn.classList.add('expandButton')
 
   h2.textContent = data.title
   date.textContent = data.date
   p[0].textContent = data.firstParagraph
   p[1].textContent = data.secondParagraph
   p[2].textContent = data.thirdParagraph
+  expBtn.textContent = "open"
 
+  // Step 2
   expBtn.addEventListener('click', () => {
     article.classList['article-open'].toggle()
   })
 
-  appendChildren([h2, ...ce(p, 3), expBtn], article)
+  appendChildren([h2, ...ce('p', 3), expBtn], article)
 
   return article
+}
+
+for(let article of data) {
+  articles.appendChild(createArticle(article))
 }
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below:
