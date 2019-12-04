@@ -131,6 +131,10 @@ const createArticle = data => {
   p[1].textContent = data.secondParagraph
   p[2].textContent = data.thirdParagraph
 
+  expBtn.addEventListener('click', () => {
+    article.classList['article-open'].toggle()
+  })
+
   appendChildren([h2, ...ce(p, 3), expBtn], article)
 
   return article
