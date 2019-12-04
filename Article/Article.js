@@ -88,8 +88,56 @@ const data = [
   }
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
-  
+// abstracting query selector into its own func
+const qs = cls => document.querySelector(cls)
+
+// create element also gets its own func
+const ce = (type, num) => {
+  if (!num) {
+    return document.createElement(type)
+  }
+  const elArr = []
+  for (let i = 1; i <= num; i++) {
+    elArr.push(document.createElement(type))
+  }
+
+  return elArr
+}
+
+// append array of children to one parent
+const appendChildren = (children, parent) => {
+  for (let child of children) {
+    parent.appendChild(child)
+  }
+}
+const articles = qs('.articles')
+
+// Step 1
+const createArticle = data => {
+
+  const article = ce('div')
+  const h2 = ce('h2')
+  const date = ce('p')
+  const p = cd('p', 3)
+  const expBtn = ce('span')
+
+  article.classList.add('article')
+  date.classList.add('date')
+  expBtn.cassList.add('expandButton')
+
+  h2.textContent = data.title
+  date.textContent = data.date
+  p[0].textContent = data.firstParagraph
+  p[1].textContent = data.secondParagraph
+  p[2].textContent = data.thirdParagraph
+
+  appendChildren([h2, ...ce(p, 3), expBtn], article)
+
+  return article
+}
+
+/* Step 1: Create a function that creates a component. You will want your component to look like the template below:
+
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -98,6 +146,7 @@ const data = [
 
     <span class='expandButton'></span>
   </div>
+
 
   Hint: You will need to use createElement more than once here!
 
